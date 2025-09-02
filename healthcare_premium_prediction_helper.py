@@ -1,11 +1,19 @@
-import pandas as pd
+import os
 from joblib import load
+import pandas as pd
 
-model_old=load(r"C:\Users\PREDATOR\Desktop\Vaishnavi\.vscode\app\artifacts\artifacts_model_old.joblib")
-model_young=load(r"C:\Users\PREDATOR\Desktop\Vaishnavi\.vscode\app\artifacts\artifacts_model_young.joblib")
+# Base directory of this script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
 
-scaler_old=load(r"C:\Users\PREDATOR\Desktop\Vaishnavi\.vscode\app\artifacts\artifacts_scaler_old.joblib")
-scaler_young=load(r"C:\Users\PREDATOR\Desktop\Vaishnavi\.vscode\app\artifacts\artifacts_scaler_young.joblib")
+# Load models
+model_old = load(os.path.join(ARTIFACTS_DIR, "artifacts_model_old.joblib"))
+model_young = load(os.path.join(ARTIFACTS_DIR, "artifacts_model_young.joblib"))
+
+# Load scalers
+scaler_old = load(os.path.join(ARTIFACTS_DIR, "artifacts_scaler_old.joblib"))
+scaler_young = load(os.path.join(ARTIFACTS_DIR, "artifacts_scaler_young.joblib"))
+
 
 def cal_normalized_risk_score(medical_history: str) -> int:
     # risk scores dictionary
